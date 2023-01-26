@@ -8,6 +8,12 @@ public class Recipe {
     private String recipeDescription;
     private int totalTime;
 
+    // These variables are for the recipe ingredients
+    private String foodCategoryName;
+    private int amount;
+    private String measurementName;
+    private String ingredientName;
+
     public Recipe() {}
 
     public Recipe(int recipeId, int foodCategoryId, String recipeName, String recipeDescription, int totalTime) {
@@ -16,6 +22,19 @@ public class Recipe {
         this.recipeName = recipeName;
         this.recipeDescription = recipeDescription;
         this.totalTime = totalTime;
+    }
+
+    public Recipe(int recipeId, int foodCategoryId, String recipeName, String recipeDescription, int totalTime,
+                  String foodCategoryName, int amount, String measurementName, String ingredientName) {
+        this.recipeId = recipeId;
+        this.foodCategoryId = foodCategoryId;
+        this.recipeName = recipeName;
+        this.recipeDescription = recipeDescription;
+        this.totalTime = totalTime;
+        this.foodCategoryName = foodCategoryName;
+        this.amount = amount;
+        this.measurementName = measurementName;
+        this.ingredientName = ingredientName;
     }
 
     public int getRecipeId() {
@@ -51,6 +70,34 @@ public class Recipe {
     }
     public void setTotalTime(int totalTime) {
         this.totalTime = totalTime;
+    }
+
+    public String getFoodCategoryName() {
+        return foodCategoryName;
+    }
+    public void setFoodCategoryName(String foodCategoryName) {
+        this.foodCategoryName = foodCategoryName;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getMeasurementName() {
+        return measurementName;
+    }
+    public void setMeasurementName(String measurementName) {
+        this.measurementName = measurementName;
+    }
+
+    public String getIngredientName() {
+        return ingredientName;
+    }
+    public void setIngredientName(String ingredientName) {
+        this.ingredientName = ingredientName;
     }
 
     @Override

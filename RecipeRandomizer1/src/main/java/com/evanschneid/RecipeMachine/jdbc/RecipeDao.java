@@ -10,7 +10,7 @@ public interface RecipeDao {
 
     public List<Recipe> getAllRecipes();
 
-    public Recipe getRecipeDetails(int recipeId);
+    public List<Recipe> getRecipeDetails(int recipeId);
 
     public Recipe getRandomRecipe();
 

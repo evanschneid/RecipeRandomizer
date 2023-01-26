@@ -14,5 +14,4 @@ public class RecipeMachineApplication {
 	// Questions:
 	// 1. How to combine tables and send that info to postman (see JdbcRecipeDao for an example with Recipe Details)
 	// 2. Should I build out Dao's and Jdbc's for all the models? Even if there are no plans to search for specific ingredients/ Measurements/ Steps
-	// 3. How to get the Random Number working, so I can implement that in a call
 }

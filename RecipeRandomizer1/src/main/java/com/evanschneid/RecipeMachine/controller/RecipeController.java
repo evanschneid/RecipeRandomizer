@@ -4,14 +4,12 @@ import com.evanschneid.RecipeMachine.jdbc.RecipeDao;
 import com.evanschneid.RecipeMachine.model.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class RecipeController {
 
@@ -33,14 +31,9 @@ public class RecipeController {
         }
     }
 
-    @RequestMapping(path = "/all-recipes/{recipeId}/details", method = RequestMethod.GET)
-    public Recipe getSingleRecipeDetails(@PathVariable int recipeId) {
-        Recipe recipe = recipeDao.getRecipeDetails(recipeId);
-        if (recipe == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe not found");
-        } else {
-            return recipe;
-        }
+   @RequestMapping(path = "/all-recipes/{recipeId}/details", method = RequestMethod.GET)
+    public List<Recipe> getSingleRecipeDetails(@PathVariable int recipeId) {
+        return recipeDao.getRecipeDetails(recipeId);
     }
 
     @RequestMapping(path = "/random-recipe", method = RequestMethod.GET)

@@ -47,9 +47,9 @@ public class JdbcRecipeDao implements RecipeDao{
 
     // This method gets a specific recipe and all the details for that recipe (Ingredients)
     @Override
-    public Recipe getRecipeDetails(int recipeId) {
-        Recipe recipe = null;
-        String sql = "SELECT r.recipe_name, fc.food_category_name, recipe_description, total_time, ri.amount, mu.measurement_name, i.ingredient_name " +
+    public List<Recipe> getRecipeDetails(int recipeId) {
+        List<Recipe> recipe = new ArrayList<>();
+        String sql = "SELECT r.recipe_id, r.recipe_name, r.food_category_id, fc.food_category_name, total_time, ri.amount, mu.measurement_name, i.ingredient_name " +
                      "FROM recipe r " +
                      "JOIN recipe_ingredient ri ON r.recipe_id = ri.recipe_id " +
                      "JOIN ingredients i ON i.ingredient_id = ri.ingredient_id " +
@@ -57,16 +57,8 @@ public class JdbcRecipeDao implements RecipeDao{
                      "LEFT OUTER JOIN measurements mu on mu.measurement_id = ri.measurement_id " +
                      "WHERE r.recipe_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, recipeId);
-        if(results.next()) {
-            recipe = mapToRecipe(results);
-
-            // How would i be able to combine tables
-/*            recipe.setRecipeId(rowSet.getInt("recipe_id"));
-            recipe.setRecipeName(rowSet.getString("recipe_name"));
-            recipe.setFoodCategoryId(rowSet.getString("food_category_name"));
-            recipe.setRecipe_description(rowSet.getString("recipe_description"));
-            recipe.setTotalTime(rowSet.getInt("total_time"));*/
-
+        while(results.next()) {
+            recipe.add(mapToRecipeIngredients(results));
         }
         return recipe;
     }
@@ -75,9 +67,6 @@ public class JdbcRecipeDao implements RecipeDao{
     @Override
     public Recipe getRandomRecipe() {
         Recipe recipe = null;
-/*        Random randNum = new Random();
-        int upper = getAllRecipes().size();
-        int randInt = randNum.nextInt(upper);*/
 
         int min = 1;
         int max = getAllRecipes().size();
@@ -114,6 +103,19 @@ public class JdbcRecipeDao implements RecipeDao{
         recipe.setFoodCategoryId(rowSet.getInt("food_category_id"));
         recipe.setRecipeDescription(rowSet.getString("recipe_description"));
         recipe.setTotalTime(rowSet.getInt("total_time"));
+        return recipe;
+    }
+
+    private Recipe mapToRecipeIngredients(SqlRowSet rowSet) {
+        Recipe recipe = new Recipe();
+        recipe.setRecipeId(rowSet.getInt("recipe_id"));
+        recipe.setRecipeName(rowSet.getString("recipe_name"));
+        recipe.setFoodCategoryId(rowSet.getInt("food_category_id"));
+        recipe.setFoodCategoryName(rowSet.getString("food_category_name"));
+        recipe.setTotalTime(rowSet.getInt("total_time"));
+        recipe.setAmount(rowSet.getInt("amount"));
+        recipe.setMeasurementName(rowSet.getString("measurement_name"));
+        recipe.setIngredientName(rowSet.getString("ingredient_name"));
         return recipe;
     }
 }
