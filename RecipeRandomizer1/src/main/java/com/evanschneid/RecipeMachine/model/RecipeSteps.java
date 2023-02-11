@@ -1,7 +1,9 @@
 package com.evanschneid.RecipeMachine.model;
 
 public class RecipeSteps {
-
+//testing this out
+    // another edit
+    
     private int recipeStepId;
     private int recipeStepsRecipeId;
     private int recipeStepNumber;
