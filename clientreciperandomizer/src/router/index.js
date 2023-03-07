@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Recipes from '../components/Recipes.vue'
+//import SingleRecipePage from '../components/SingleRecipePage.vue'
+import SingleRecipeDetailsPage from '../components/SingleRecipeDetails.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +25,16 @@ const routes = [
     path: '/recipes',
     name: 'Recipes',
     component: Recipes
+  },
+  // {
+  //   path: '/recipes/:recipeId',
+  //   name: 'SingleRecipePage',
+  //   component: SingleRecipePage
+  // },
+  {
+    path: '/recipes/:recipeId/details',
+    name: 'SingleRecipeDetailsPage',
+    component: SingleRecipeDetailsPage
   }
 ]
 

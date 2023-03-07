@@ -1,8 +1,17 @@
 <template>
   <div>
       <h1>Hello!</h1>
-        <div class="recipe-box" v-for="recipe in allRecipes" v-bind:key="recipe.recipeId"> {{ recipe.recipeName }}
-          <p>{{ recipe.recipeDescription }}</p>
+        <div class="recipe-container"> 
+        <router-link
+        v-for="recipe in allRecipes"
+        :key="recipe.recipeId"
+        :to="{ name: 'SingleRecipePage', params: { recipeId: recipe.recipeId } }">
+        <!-- <router-link v-bind:to="{name: 'SingleRecipePage', params: {recipeId: recipe.recipeId}}" v-for="recipe in allRecipes" v-bind:key="recipe.recipeId"> -->
+            <div>
+                <h2>{{ recipe.recipeName }}</h2>
+                <p>{{ recipe.recipeDescription }}</p>
+            </div>
+        </router-link>
         </div>
         {{allRecipes}}
   </div>
@@ -26,8 +35,9 @@ export default {
 </script>
 
 <style>
-.recipe-box {
+.recipe-container {
     background-color: aqua;
     margin: 10px;
+    border: 10px solid black;
 }
 </style>

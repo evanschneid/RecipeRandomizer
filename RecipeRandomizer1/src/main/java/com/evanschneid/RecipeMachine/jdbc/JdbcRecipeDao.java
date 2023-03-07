@@ -49,7 +49,7 @@ public class JdbcRecipeDao implements RecipeDao{
     @Override
     public List<Recipe> getRecipeDetails(int recipeId) {
         List<Recipe> recipe = new ArrayList<>();
-        String sql = "SELECT r.recipe_id, r.recipe_name, r.food_category_id, fc.food_category_name, total_time, ri.amount, mu.measurement_name, i.ingredient_name " +
+        String sql = "SELECT r.recipe_id, r.recipe_name, r.recipe_description, r.food_category_id, fc.food_category_name, total_time, ri.amount, mu.measurement_name, i.ingredient_name " +
                      "FROM recipe r " +
                      "JOIN recipe_ingredient ri ON r.recipe_id = ri.recipe_id " +
                      "JOIN ingredients i ON i.ingredient_id = ri.ingredient_id " +
